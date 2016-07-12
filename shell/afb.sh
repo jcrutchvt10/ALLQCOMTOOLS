@@ -7,9 +7,11 @@
 gen_mkfile ()
 {
 	cat <<EOF > $ANDROID_PRODUCT_OUT/Android.mk
-include \$(TARGET_DEVICE_DIR)/AndroidBoard.mk
-#include \$(TARGET_DEVICE_DIR)/BoardConfig.mk
-include vendor/qcom/proprietary/common/scripts/Android.mk
+#common device
+-include \$(TARGET_DEVICE_DIR)/AndroidBoard.mk
+
+#msm8996
+-include vendor/qcom/proprietary/common/scripts/Android.mk
 EOF
 }
 
