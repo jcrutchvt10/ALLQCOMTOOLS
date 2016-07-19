@@ -16,7 +16,22 @@ fi
 #function
 adk_meminfo ()
 {
-	echo meminfo
+	adb root
+	adb wait-for-device
+while [ 1 -eq 1 ]
+do
+	adb shell cat /proc/meminfo
+	adb shell cat /proc/pagetypeinfo
+	adb shell cat /proc/slabinfo
+	adb shell cat /proc/zoneinfo
+	adb shell cat /proc/vmallocinfo
+	adb shell cat /proc/vmstat
+	adb shell cat /proc/meminfo
+	adb shell procrank
+	adb shell top -n 1
+	adb shell free -m
+	adb shell sleep 5
+done
 }
 
 adk_input ()
