@@ -1,0 +1,14 @@
+#!/bin/sh
+echo "# This is auto-gen fstab for NTFS rw on Mac OS" > /etc/fstab
+for part in `ls -l1 /Volumes/`; do
+    #uuid=`diskutil info /Volumes/$part | grep Windows_NTFS -A 5 | grep UUID | awk {'print $3'}`
+    diskutil info /Volumes/$part | grep Windows_NTFS > /dev/null
+    if [ "$?" = "0" ]; then 
+        name=`diskutil info /Volumes/$part | grep "Volume Name" | awk {'print $3'}`
+        uuid=`diskutil info /Volumes/$part | grep UUID | awk {'print $3'}`
+        echo "#Volume: $name" >> /etc/fstab
+        echo "UUID=$uuid none ntfs rw,auto,nobrowse\n" >> /etc/fstab
+    fi
+done
+
+cat /etc/fstab
