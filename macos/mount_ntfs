@@ -1,0 +1,12 @@
+#!/bin/sh
+for disk in `ls -al /dev/disk* | awk {'print $10'}`; do
+    diskutil info $disk | grep Windows_NTFS > /dev/null
+    if [ "$?" = "0" ]; then 
+        name=`diskutil info $disk | grep "Volume Name" | awk {'print $3'}`
+        echo "#Volume: $name, #Mountpoint: /Volumes/$name"
+        if [ ! -e /Volumes/$name ]; then
+            sudo mkdir /Volumes/$name
+        fi
+        sudo /usr/local/sbin/mount_ntfs $disk /Volumes/$name
+    fi
+done
