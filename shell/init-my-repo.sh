@@ -10,8 +10,7 @@ case `uname` in
 esac
 
 if [ "$SYS" == "cygwin" ]; then
-	source ~/.winixrc
-	setx REPOROOT `bb-pwd.bat` /M    
+	source ~/.winixrc    
 fi
 
 git st . 2>&1  | grep "Not a git repository" > /dev/null
@@ -21,21 +20,24 @@ if [ $? != 0 ]; then
 	exit 1
 else
 	echo "start init my repo"
+	setx REPOROOT `bb-pwd.bat` /M
 fi
 
-git clone https://github.com/kiddlu/Ubuntu.git
-git clone https://github.com/kiddlu/Winix.git
+git clone git@github.com:kiddlu/Posix.git
+git clone git@github.com:kiddlu/Winix.git
 
-git clone https://github.com/kiddlu/hello-windows.git
-git clone https://github.com/kiddlu/hello-chrome.git
-git clone https://github.com/kiddlu/hello-sublime.git
-git clone https://github.com/kiddlu/hello-sourceinsight.git
+git clone git@github.com:kiddlu/hello-windows.git
+git clone git@github.com:kiddlu/hello-chrome.git
+git clone git@github.com:kiddlu/hello-sublime.git
+git clone git@github.com:kiddlu/hello-sourceinsight.git
 
-git clone https://github.com/kiddlu/adbputty.git
-git clone https://github.com/kiddlu/ramparser.git
-git clone https://github.com/kiddlu/android-host-knife.git
-git clone https://github.com/kiddlu/android-target-bsp.git
+git clone git@github.com:kiddlu/adbputty.git
+git clone git@github.com:kiddlu/ramdump_toolkit.git
+git clone git@github.com:kiddlu/android-platform-knife.git
+git clone git@github.com:kiddlu/android-target-bsp.git
 
-git clone https://github.com/kiddlu/oh-my-examples.git
-git clone https://github.com/kiddlu/oh-my-tools.git
-git clone https://github.com/kiddlu/oh-my-config.git
+git clone git@github.com:kiddlu/oh-my-examples.git
+git clone git@github.com:kiddlu/oh-my-tools.git
+git clone git@github.com:kiddlu/oh-my-config.git
+
+git clone git@github.com:kiddlu/Win7-Themes.git
