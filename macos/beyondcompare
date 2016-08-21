@@ -1,1 +1,3 @@
-/Applications/Beyond Compare.app/Contents/MacOS/bcomp
+#!/bin/sh
+
+bcompare $@

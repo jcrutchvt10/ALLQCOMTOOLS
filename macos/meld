@@ -3,5 +3,5 @@
 first_arg=`busybox readlink -f $1`
 second_arg=`busybox readlink -f $2`
 
-echo $first_arg $second_arg
+#echo $first_arg $second_arg
 open "/Applications/Meld.app/" --args $first_arg $second_arg
