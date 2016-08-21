@@ -9,10 +9,6 @@ case `uname` in
     Darwin) SYS=darwin ;;
 esac
 
-if [ "$SYS" == "cygwin" ]; then
-	source ~/.winixrc    
-fi
-
 git st . 2>&1  | grep "Not a git repository" > /dev/null
 
 if [ $? != 0 ]; then
@@ -20,7 +16,9 @@ if [ $? != 0 ]; then
 	exit 1
 else
 	echo "start init my repo"
-	setx REPOROOT `bb-pwd.bat` /M
+    if [ "$SYS" == "cygwin" ]; then
+	    setx REPOROOT `bb-pwd.bat` /M
+    fi
 fi
 
 git clone git@github.com:kiddlu/Posix.git
