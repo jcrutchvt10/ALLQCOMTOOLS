@@ -83,7 +83,7 @@ adk_hexdump()
 	adb root
 	adb wait-for-device
 	adb shell "mkdir $dump_path"
-	for partition in `adb shell ls $blk_path | grep -v "system\|cache\|userdata"`; do
+	for partition in `adb shell ls $blk_path | grep -v "system\|cache\|userdata\|udisk"`; do
 		adb shell "dd if=$blk_path/$partition of=$dump_path/$partition"
 	done
 	adb shell "sync"
