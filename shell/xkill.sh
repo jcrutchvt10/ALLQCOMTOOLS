@@ -10,7 +10,7 @@ case `uname` in
 esac
 
 if [ "$SYS" == "cygwin" ]; then
-    ps -aW | percol | awk {'print $2'} | xargs kill -9
+    ps -aW | peco | awk {'print $1'} | xargs bb-kill.bat
 else
-    ps -aux | percol | awk {'print $2'} | xargs kill -9
+    ps -aux | peco | awk {'print $2'} | xargs kill
 fi
