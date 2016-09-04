@@ -11,6 +11,10 @@ esac
 
 if [ "$SYS" == "cygwin" ]; then
     ps -aW | peco | awk {'print $1'} | xargs bb-kill.bat
+elif [ "$SYS" == "darwin" ]; then
+    ps aux | peco | awk {'print $2'} | xargs kill
+elif [ "$SYS" == "linux" ]; then
+    ps aux | peco | awk {'print $2'} | xargs kill
 else
-    ps -aux | peco | awk {'print $2'} | xargs kill
+    echo "Can not regonize your system"
 fi
