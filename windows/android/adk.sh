@@ -123,13 +123,34 @@ adk_net-shell()
 	adb -s $ipaddr:$tcpport shell
 }
 
-
 adk_flash-dir()
 {
 	webcgi="http://172.16.2.18/cgi-bin/vmlinux-lookup.cgi"
 	version=$(adb shell "cat /proc/version" | grep "Linux version")
 	if [ $host_platform == "cygwin" ] ; then
 		smb_path=$(curl --data-urlencode "version=$version" $webcgi 2> /dev/null | grep "Flashing binary" -A 1 | tail -1)
+		unc_path=$(echo ${smb_path#*smb:})
+		for string in `net use | grep "Microsoft Windows Network" | awk '{printf ("%s@%s\n",$2, $3)}'`; do
+			drive=$(echo $string  |awk -F'@' '$0=$1')
+			map_point=$(echo $string|awk -F'@' '$0=$2'| sed "s/\\\/\//g")
+			echo $unc_path | grep $map_point > /dev/null
+			if [ $? == 0 ]; then
+				#echo $drive $map_point $win_path
+				map_point_regex=$(echo $map_point | sed "s/\//\\\\\//g")
+				drive_regex=$(echo $drive | sed "s/\:/\\\:/g")
+				win_path=$(echo "$unc_path" | sed "s/$map_point_regex/$drive_regex/g")
+				echo $win_path | tee /dev/console | tr '\n' ' ' | clip
+			fi
+		done
+	fi
+}
+
+adk_symbol-dir()
+{
+	webcgi="http://172.16.2.18/cgi-bin/vmlinux-lookup.cgi"
+	version=$(adb shell "cat /proc/version" | grep "Linux version")
+	if [ $host_platform == "cygwin" ] ; then
+		smb_path=$(curl --data-urlencode "version=$version" $webcgi 2> /dev/null | grep "kernel symbols" -A 1 | tail -1)
 		unc_path=$(echo ${smb_path#*smb:})
 		for string in `net use | grep "Microsoft Windows Network" | awk '{printf ("%s@%s\n",$2, $3)}'`; do
 			drive=$(echo $string  |awk -F'@' '$0=$1')
@@ -176,6 +197,8 @@ case "$1" in
 		adk_meminfo;;
 	flash-dir)
 		adk_flash-dir;;
+	symbol-dir)
+		adk_symbol-dir;;
 	root)
 		adk_root;;
 	cpu-performance)

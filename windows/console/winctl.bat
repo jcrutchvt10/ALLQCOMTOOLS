@@ -11,12 +11,12 @@ if '%1'=='signoff' (
 	bcdedit /set testsigning on
 ) else if '%1'=='tsoff' (
 	bcdedit /set testsigning off
-) else if '%1'=='cp' (
-	rundll32.exe shell32.dll,Control_RunDLL
-) else if '%1'=='cp' (
-	rundll32.exe shell32.dll,Control_RunDLL
-) else if '%1'=='cp' (
-	rundll32.exe shell32.dll,Control_RunDLL
+) else if '%1'=='suspend' (
+	rundll32  powroprof.dll,SetSuspendState
+) else if '%1'=='sleep' (
+	rundll32  powrprof.dll,SetSuspendState 0,1,0
+) else if '%1'=='lock' (
+	rundll32.exe User32.dll,LockWorkStation
 )
 
 exit /b
@@ -29,9 +29,5 @@ echo winctl cp      : Control Panel
 echo winctl dm      : Device Manager
 echo winctl tson    : testsigning on
 echo winctl tsoff   : testsigning off
-echo winctl signoff : disable intergrity checks
-echo winctl signoff : disable intergrity checks
-echo winctl signoff : disable intergrity checks
-echo winctl signoff : disable intergrity checks
-echo winctl signoff : disable intergrity checks
-echo winctl signoff : disable intergrity checks
+echo winctl suspend : PC suspend
+echo winctl sleep   : PC sleep
