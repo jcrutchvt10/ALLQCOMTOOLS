@@ -1,3 +1,3 @@
 @echo off
 
-%~dp0\console.exe cmder.bat
+%~dp0\winpty.exe cmder.bat
