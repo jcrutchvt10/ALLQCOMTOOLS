@@ -24,7 +24,7 @@ echo Upgrading Cygwin from %MIRROR%
 echo Writing data to %DIST_DIR%
 
 echo Downloading Cygwin %CYGWIN_VERSION%
-"%BASH%" --login -c "source ~/.bashrc; /bin/wget.exe -N --directory-prefix='%DIST_DIR%' https://cygwin.com/setup-x86_64.exe" || goto :ERROR
+"%BASH%" --login -c "source ~/.bashrc; /bin/wget.exe -N --directory-prefix='%DIST_DIR%' https://cygwin.com/setup-x86.exe" || goto :ERROR
 
 :RUNNINGCHECK
 "%BASH%" --login -c "source ~/.bashrc; /bin/ps.exe | /bin/grep.exe /usr/bin/mintty | /bin/wc.exe -l" > "%DIST_DIR%/running_count"
@@ -47,7 +47,7 @@ echo Clean dist files
 "%BASH%" --login -c "source ~/.bashrc; /bin/rm.exe -rf /dist/http*"
 "%BASH%" --login -c "source ~/.bashrc; /bin/rm.exe -rf /dist/root_path"
 "%BASH%" --login -c "source ~/.bashrc; /bin/rm.exe -rf /dist/running_count"
-"%BASH%" --login -c "source ~/.bashrc; /bin/cp.exe -pf /dist/setup-x86_64.exe /"
+"%BASH%" --login -c "source ~/.bashrc; /bin/cp.exe -pf /dist/setup-x86.exe /"
 GOTO END
 
 :NOTFOUND

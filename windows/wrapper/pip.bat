@@ -1,3 +1,3 @@
 @echo off  
 
-C:\Python2\Scripts\pip.exe %*
+%WINIXROOT%\Python\python.exe -m pip %*
