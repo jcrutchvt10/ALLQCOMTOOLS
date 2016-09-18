@@ -1,3 +1,3 @@
 @echo off  
 
-%WINIXROOT%\Python\Scripts\glances.exe %*
+%WINIXROOT%\Python\python.exe -m pip %*
