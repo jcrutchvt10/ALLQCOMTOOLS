@@ -1,14 +1,16 @@
 @echo off
 
-::cygwin version
-::%WINIXROOT%\Cygwin\bin\bash.exe -i -c "/bin/emacs-w32.exe %*"
+busybox ps | busybox grep emacs > nul
+if '%ERRORLEVEL%' NEQ '0' (
+	 start "" %WINIXROOT%\Emacs\bin\emacs.exe
+	 busybox sleep 3
+)
 
 ::windows version
 if not '%1'=='--help' (
-	set PATH=%WINIXROOT%\Emacs\bin;%PATH%;
-	start "" %WINIXROOT%\Emacs\bin\emacs.exe %*
+	%WINIXROOT%\Emacs\bin\emacsclient.exe -n %*
 ) else (
-	%WINIXROOT%\Emacs\bin\emacs.exe --help
+	%WINIXROOT%\Emacs\bin\emacsclient.exe --help
 	echo.
 	echo.
 	echo chown.exe -R huangxiaolu .emacs.d\
