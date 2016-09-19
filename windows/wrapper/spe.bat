@@ -8,4 +8,7 @@ if not '%1'=='--help' (
 	start "" %WINIXROOT%\Emacs\bin\emacs.exe %*
 ) else (
 	%WINIXROOT%\Emacs\bin\emacs.exe --help
+	echo.
+	echo.
+	echo chown.exe -R huangxiaolu .emacs.d\
 )

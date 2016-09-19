@@ -167,6 +167,33 @@ adk_symbol-dir()
 	fi
 }
 
+adk_fix-usb()
+{
+	if [ $host_platform == "cygwin" ]; then
+		outpath=$USERPROFILE
+	else
+		outpath=$HOME
+	fi
+	adb kill-server
+	curl https://raw.githubusercontent.com/kiddlu/adbusbini/master/adb_usb.ini > $outpath/.android/adb_usb.ini
+	adb start-server
+}
+
+adk_usb-diag()
+{
+	adb root
+	adb wait-for-device
+}
+
+adk_pmap-all()
+{
+	for pid in `adb shell "ps" | awk '{print $2}' `; do
+		cmdline=`adb shell cat /proc/$pid/cmdline`
+		if [ -n "$cmdline" ]; then
+			adb shell pmap $pid
+		fi
+	done
+}
 ################### main ###################
 
 host_platform=""
@@ -199,6 +226,12 @@ case "$1" in
 		adk_flash-dir;;
 	symbol-dir)
 		adk_symbol-dir;;
+	fix-usb)
+		adk_fix-usb;;
+	usb-diag)
+		adk_usb-diag;;
+	pmap-all)
+		adk_pmap-all;;
 	root)
 		adk_root;;
 	cpu-performance)
