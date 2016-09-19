@@ -1,3 +1,9 @@
 #!/bin/sh
 
-/Applications/Emacs.app/Contents/MacOS/Emacs $*
+ps -ax | grep emacs-plus > /dev/null
+if [ $? -ne 0 ]; then
+    /Applications/Emacs.app/Contents/MacOS/Emacs $*
+    sleep 3
+fi
+
+emacsclient -n $*
