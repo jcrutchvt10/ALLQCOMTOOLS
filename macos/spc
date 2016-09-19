@@ -1,8 +1,8 @@
 #!/bin/sh
 
-ps -ax | grep emacs-plus > /dev/null
+ps -ax | grep -v grep | grep Emacs > /dev/null
 if [ $? -ne 0 ]; then
-    /Applications/Emacs.app/Contents/MacOS/Emacs $*
+    /Applications/Emacs.app/Contents/MacOS/Emacs &
     sleep 3
 fi
 
