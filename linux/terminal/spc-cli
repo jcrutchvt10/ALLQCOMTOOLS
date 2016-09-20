@@ -1,0 +1,3 @@
+#!/bin/sh
+
+/opt/emacs/bin/emacs -nw $*
