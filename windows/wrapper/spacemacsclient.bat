@@ -3,6 +3,7 @@
 busybox ps | busybox grep emacs > nul
 if '%ERRORLEVEL%' NEQ '0' (
 	 start "" %WINIXROOT%\Emacs\bin\emacs.exe
+	 busybox rm %HOME%\.emacs.d\server\server > nul
 	 busybox sleep 3
 )
 
