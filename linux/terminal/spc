@@ -1,9 +1,9 @@
 #!/bin/sh
 
-ps -ax | grep -v grep | grep Emacs > /dev/null
+ps -ax | grep -v grep | grep emacs > /dev/null
 if [ $? -ne 0 ]; then
-    emacs &
+    /opt/emacs/bin/emacs &
     sleep 5
 fi
 
-emacsclient -n $*
+/opt/emacs/bin/emacsclient -n $*

@@ -1,18 +1,18 @@
-#!/bin/bash  
+#!/bin/bash
 
-while getopts "r:m:u:p:" opt; do  
-	case $opt in  
-		r)  
-			remotetarget=$OPTARG   
-			;;  
-		m)  
-			mountpoint=$OPTARG   
-			;;  
+while getopts "r:m:u:p:" opt; do
+	case $opt in
+		r)
+			remotetarget=$OPTARG
+			;;
+		m)
+			mountpoint=$OPTARG
+			;;
 		u)
 			username=$OPTARG
 			;;
-		p)  
-			password=$OPTARG   
+		p)
+			password=$OPTARG
 			;;
 	esac
 done
