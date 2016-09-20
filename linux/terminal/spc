@@ -2,8 +2,8 @@
 
 ps -ax | grep -v grep | grep emacs > /dev/null
 if [ $? -ne 0 ]; then
-    /opt/emacs/bin/emacs &
+    /opt/emacs/bin/emacs --daemon &
     sleep 5
 fi
 
-/opt/emacs/bin/emacsclient -n $*
+/opt/emacs/bin/emacsclient $*
