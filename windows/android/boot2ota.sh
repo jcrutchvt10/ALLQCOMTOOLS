@@ -28,6 +28,7 @@ else
   OUTPUT=`readlink -f $2`
 fi
 
+#echo "pack ramdisk to $OUTPUT"
 
 base64 -d <<EOF  > $OUTPUT
 UEsDBBQAAAAAAHpOJkkAAAAAAAAAAAAAAAAJAAAATUVUQS1JTkYvUEsDBBQAAAAAAHpOJkkAAAAA

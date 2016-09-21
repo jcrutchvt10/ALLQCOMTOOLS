@@ -29,11 +29,11 @@ esac
 
 INPUT=$1
 
-if [ ! -d "$INPUT" ]; then
+if [ ! -d "$INPUT" ]; then 
   echo -e "\033[31mErr: $INPUT does not exist\033[0m"
   echo ""
   exec echo "$usage"
-  exit 1
+  exit 1 
 fi
 
 if  [ ! -n "$2" ] ;then
