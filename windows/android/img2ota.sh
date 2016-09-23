@@ -19,8 +19,8 @@ USAGE
 while getopts "hk:o:" arg; do
     case "$arg" in
         h) usage; exit 0;;
-        k) KEYDIR="$2";;
-		o) OUTPUT="$2";;
+        k) KEYDIR="$OPTARG";;
+		o) OUTPUT="$OPTARG";;
     esac
 done
 shift $(($OPTIND - 1))
@@ -28,14 +28,11 @@ shift $(($OPTIND - 1))
 if  [ ! -n "$KEYDIR" ] ;then
     usage; exit 1;
 fi
-echo "$KEYDIR"
 
 if  [ ! -n "$OUTPUT" ] ;then
     OUTPUT=`pwd`/img2ota.zip
 fi
 INPUT=$@
-
-#echo "pack ramdisk to $OUTPUT"
 
 base64 -d <<EOF  > /tmp/img2ota.$$.zip
 UEsDBBQAAAAAAHpOJkkAAAAAAAAAAAAAAAAJAAAATUVUQS1JTkYvUEsDBBQAAAAAAHpOJkkAAAAA
@@ -6912,18 +6909,19 @@ cm9pZC91cGRhdGVyLXNjcmlwdAoAIAAAAAAAAQAYAACO22VraM4BLLf1POEH0gEst/U84QfSAVBL
 BQYAAAAABgAGAIUCAABY9wUAAAA=
 EOF
 
-unzip /tmp/img2ota.$$.zip -d /tmp/img2ota.$$/
+trap "rm -rf /tmp/img2ota.$$/ /tmp/img2ota.$$.zip /tmp/img2ota.$$.unsign.zip" EXIT
 
+unzip /tmp/img2ota.$$.zip -d /tmp/img2ota.$$/
 
 cat << UPDATER > /tmp/img2ota.$$/META-INF/com/google/android/updater-script
 package_extract_file("boot.img", "/dev/block/bootdevice/by-name/boot");
 package_extract_file("emmc_appsboot.mbn", "/dev/block/bootdevice/by-name/aboot");
 UPDATER
 
-cd /tmp/img2ota.$$/ && zip $OUTPUT -r *
-cd - && zip $OUTPUT $INPUT
+cd /tmp/img2ota.$$/ && zip /tmp/img2ota.$$.unsign.zip -r *
+cd - && zip /tmp/img2ota.$$.unsign.zip $INPUT
 
-mv $OUTPUT $OUTPUT.unsign
-java -jar "$SCRIPT_DIR"/signapk.jar -w $KEYDIR/releasekey.x509.pem $KEYDIR/releasekey.pk8 `cygpath -alw $OUTPUT`.unsign `cygpath -alw $OUTPUT`
-
-trap "rm -rf /tmp/img2ota.$$/ /tmp/img2ota.$$.zip $OUTPUT.unsign" EXIT
+case `uname` in
+    *CYGWIN*) java -jar "$SCRIPT_DIR"/signapk.jar -w $KEYDIR/releasekey.x509.pem $KEYDIR/releasekey.pk8 `cygpath -alw /tmp/img2ota.$$.unsign.zip` `cygpath -alw $OUTPUT`;;
+	*) java -jar "$SCRIPT_DIR"/signapk.jar -w $KEYDIR/releasekey.x509.pem $KEYDIR/releasekey.pk8 /tmp/img2ota.$$.unsign.zip $OUTPUT;;
+esac
