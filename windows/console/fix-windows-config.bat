@@ -1,5 +1,4 @@
-@echo off
-
+@echo on
 
 copy /y %HOME%\xcfg\windows\Cmder.init.bat %CMDER_ROOT%\
 copy /y %HOME%\xcfg\windows\Cmder.aliases.rc %CMDER_ROOT%\
@@ -14,8 +13,8 @@ copy /y %HOME%\xcfg\windows\FreeCommander.fav.ini %WINIXROOT%\FreeCommander\SETT
 copy /y %HOME%\xcfg\windows\FreeCommander.ini %WINIXROOT%\FreeCommander\SETTINGS\FreeCommander.ini
 copy /y %HOME%\xcfg\windows\FreeCommander.shc %WINIXROOT%\FreeCommander\SETTINGS\FreeCommander.shc
 
-copy /y %HOME%\xcfg\windows\MacType.ini %WINIXROOT%\MacType\MacType.ini /y
-copy /y %HOME%\xcfg\windows\MacType.Winix.ini %WINIXROOT%\MacType\ini\Winix.ini
+::copy /y %HOME%\xcfg\windows\MacType.ini %WINIXROOT%\MacType\MacType.ini /y
+::copy /y %HOME%\xcfg\windows\MacType.Winix.ini %WINIXROOT%\MacType\ini\Winix.ini
 
 copy /y %HOME%\xcfg\windows\Listary.Preferences.json %WINIXROOT%\Listary\UserData\Preferences.json
 
