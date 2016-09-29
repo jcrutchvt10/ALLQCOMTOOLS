@@ -1,5 +1,4 @@
 #!/bin/sh
-source ~/.winixrc
 
 for string in `net use | grep "Unavailable" | awk '{printf ("%s@%s\n",$2, $3) }'`; do
 	drive=$(echo $string  |awk -F'@' '$0=$1')
