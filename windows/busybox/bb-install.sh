@@ -32,7 +32,7 @@ fi
 
 if [ "$SYS" == "cygwin" ]; then
 	for cmd in `./busybox.exe --list`; do
-		/usr/bin/echo @%~dp0\\busybox.exe $cmd %*>bb-$cmd.bat;
+		/usr/bin/echo @%~dp0\\busybox.exe $cmd %* > bb-$cmd.bat;
 	done
 else
 	sed -r  's/\ *(\w*\[*\-*\w*),*/echo @%~dp0\\\\busybox.exe \1 %*>\1.bat\n/g' bb.txt>bb
