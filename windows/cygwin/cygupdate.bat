@@ -28,7 +28,7 @@ echo Downloading Cygwin %CYGWIN_VERSION%
 
 :RUNNINGCHECK
 "%BASH%" --login -c "source ~/.bashrc; /bin/ps.exe | /bin/grep.exe /usr/bin/mintty | /bin/wc.exe -l" > "%DIST_DIR%/running_count"
-set /p RUNNING_COUNT=<"%DIST_DIR%/running_count"	
+set /p RUNNING_COUNT=<"%DIST_DIR%/running_count"
 
 if NOT "%RUNNING_COUNT%"=="0" (
 	echo ERROR: There's %RUNNING_COUNT% running cygwin instance[s]. Close all cygwin windows [mintty processes] and try again.
@@ -39,7 +39,7 @@ if NOT "%RUNNING_COUNT%"=="0" (
 cd %DIST_DIR%
 "%BASH%" --login -c "source ~/.bashrc; /bin/cygpath.exe -w /" > "%DIST_DIR%/root_path"
 set /p ROOT_PATH=<"%DIST_DIR%/root_path"
-%DIST_DIR%\setup-x86_64.exe --quiet-mode --upgrade-also --site="%MIRROR%" --no-admin --no-shortcuts --no-startmenu --no-desktop --root="%ROOT_PATH%" --local-package-dir="%DIST_DIR%" || goto :ERROR
+%DIST_DIR%\setup-x86.exe --quiet-mode --upgrade-also --site="%MIRROR%" --no-admin --no-shortcuts --no-startmenu --no-desktop --root="%ROOT_PATH%" --local-package-dir="%DIST_DIR%" || goto :ERROR
 GOTO CLEAN
 
 :CLEAN

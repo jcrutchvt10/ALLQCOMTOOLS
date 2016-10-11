@@ -1,0 +1,3 @@
+@echo off
+
+xrdb ~/.Xresources
