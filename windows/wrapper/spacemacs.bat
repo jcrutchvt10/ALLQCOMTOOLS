@@ -5,7 +5,8 @@
 
 ::windows version
 if not '%1'=='--help' (
-	start "" %WINIXROOT%\Emacs\bin\emacs.exe %*
+	::start "" %WINIXROOT%\Emacs\bin\emacs.exe %*
+	%WINIXROOT%\Emacs\bin\runemacs.exe %*
 ) else (
 	%WINIXROOT%\Emacs\bin\emacs.exe --help
 	echo.

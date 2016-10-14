@@ -3,7 +3,8 @@
 copy /y %HOME%\xcfg\windows\Cmder.init.bat %CMDER_ROOT%\
 copy /y %HOME%\xcfg\windows\Cmder.aliases.rc %CMDER_ROOT%\
 copy /y %HOME%\xcfg\windows\ConEmu.xml %CMDER_ROOT%\config\
-copy /y %HOME%\xcfg\windows\cmder.lua %CMDER_ROOT%\config\
+copy /y %HOME%\xcfg\windows\Cmder.config.settings %CMDER_ROOT%\config\settings
+copy /y %HOME%\xcfg\windows\clink.lua %CMDER_ROOT%\vendor\
 
 copy /y %HOME%\xcfg\windows\Ditto.Settings %WINIXROOT%\Ditto\Ditto.Settings
 
