@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\Markdownpad\MarkdownPad2.exe %*
+start "" %WINIXROOT%\Markdownpad\MarkdownPad2.exe %*
