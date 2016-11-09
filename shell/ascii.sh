@@ -692,8 +692,6 @@ Most HTML escapes are in decimal so the letter A can be written as <span class="
 </div></html>
 HTMLEND
 
-open `cygpath -alw $html_file`
-
 case `uname` in
     *CYGWIN*) open `cygpath -alw $html_file` ;;
     *) open $html_file;;
