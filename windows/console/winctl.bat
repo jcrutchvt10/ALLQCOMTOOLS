@@ -4,9 +4,9 @@ if '%*'=='' call :help & exit /b
 if '%1'=='signoff' (
 	bcdedit /set loadoptions DISABLE_INTEGRITY_CHECKS
 ) else if '%1'=='cp' (
-	rundll32 shell32.dll,Control_RunDLL
+	start rundll32 shell32.dll,Control_RunDLL
 ) else if '%1'=='dm' (
-	rundll32 devmgr.dll DeviceManager_Execute
+	start rundll32 devmgr.dll DeviceManager_Execute
 ) else if '%1'=='tson' (
 	bcdedit /set testsigning on
 ) else if '%1'=='tsoff' (
@@ -17,6 +17,16 @@ if '%1'=='signoff' (
 	rundll32  powrprof.dll,SetSuspendState 0,1,0
 ) else if '%1'=='lock' (
 	rundll32.exe User32.dll,LockWorkStation
+) else if '%1'=='gp' (
+	start gpedit.msc
+) else if '%1'=='ev' (
+	start eventvwr.msc
+) else if '%1'=='reg' (
+	start regedit.exe
+) else if '%1'=='tskmg' (
+	start taskmgr.exe
+) else if '%1'=='srv' (
+	start services.msc
 )
 
 exit /b
@@ -27,6 +37,11 @@ echo.
 echo winctl signoff : disable intergrity checks
 echo winctl cp      : Control Panel
 echo winctl dm      : Device Manager
+echo winctl ev      : Event Viewer
+echo winctl gp      : Group Policy
+echo winctl reg     : Reg Editor
+echo winctl tskmg   : Task Manager
+echo winctl srv     : Services Manager
 echo winctl tson    : testsigning on
 echo winctl tsoff   : testsigning off
 echo winctl suspend : PC suspend
