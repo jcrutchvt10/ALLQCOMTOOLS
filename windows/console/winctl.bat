@@ -16,6 +16,7 @@ if '%1'=='signoff' (
 ) else if '%1'=='sleep' (
 	rundll32  powrprof.dll,SetSuspendState 0,1,0
 ) else if '%1'=='lock' (
+<<<<<<< Updated upstream
 	rundll32.exe User32.dll,LockWorkStation
 ) else if '%1'=='gp' (
 	start gpedit.msc
@@ -27,9 +28,19 @@ if '%1'=='signoff' (
 	start taskmgr.exe
 ) else if '%1'=='srv' (
 	start services.msc
+=======
+	rundll32 User32.dll,LockWorkStation
+) else if '%1'=='sp' (
+	control sysdm.cpl
+) else if '%1'=='ups' (
+	rundll32 keymgr.dll,KRShowKeyMgr
+) else if '%1'=='lock' (
+	control sysdm.cpl
+>>>>>>> Stashed changes
 )
-
 exit /b
+
+::https://roothaxor.github.io/Windows/
 
 :help
 echo This is the windows control batfile for easy use
@@ -45,4 +56,10 @@ echo winctl srv     : Services Manager
 echo winctl tson    : testsigning on
 echo winctl tsoff   : testsigning off
 echo winctl suspend : PC suspend
+<<<<<<< Updated upstream
 echo winctl sleep   : PC sleep
+=======
+echo winctl sleep   : PC sleep
+echo winctl sp      : System Properties
+echo winctl ups     : Stored User names and Passwords
+>>>>>>> Stashed changes
