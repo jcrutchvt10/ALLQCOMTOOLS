@@ -11,7 +11,7 @@ mkdir -p $TMPDIR
 
 LOGROOT=/data/bootchart
 TARBALL=bootchart.tgz
-BOOTCHART=pybootchartgui.exe
+BOOTCHART=pybootchartgui.bat
 #BOOTCHART=/d/MyRepo/bootchart/pybootchartgui.py
 BOOTGRAPH=`which bootgraph.pl`
 
