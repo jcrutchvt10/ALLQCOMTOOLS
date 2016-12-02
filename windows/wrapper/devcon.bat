@@ -2,9 +2,9 @@
 
 :: Pick right version
 if "%PROCESSOR_ARCHITECTURE%"=="x86" (
-    set arch=i386
+    set WIN_ARCH=i386
 ) else (
-    set arch=amd64
+    set WIN_ARCH=amd64
 )
 
-%HOME%\xbin\windows\mircosoft\devcon\%arch%\devcon.exe %*
+%HOME%\xbin\windows\mircosoft\devcon\%WIN_ARCH%\devcon.exe %*
