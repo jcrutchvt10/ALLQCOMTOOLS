@@ -3,6 +3,8 @@
 # All options are passed to adb, for better or for worse.
 # See the readme in this directory for more on bootcharting.
 
+set -x
+
 TMPDIR=/tmp/android-bootchart
 WIN_TMPDIR=`cygpath -awl /tmp/android-bootchart`
 
@@ -29,6 +31,6 @@ explorer ${TARBALL%.tgz}-svg.html
 KLOG=/data/logs/.kmsg
 adb "${@}" root
 adb "${@}" wait-for-device
-adb "${@}" pull $KLOG $WIN_TMPDIR/kmsg 2>&1 > /dev/null
+adb "${@}" shell dmesg > $WIN_TMPDIR/kmsg
 cat $WIN_TMPDIR/kmsg | perl $BOOTGRAPH -header > ./kernel-svg.html
 explorer kernel-svg.html
