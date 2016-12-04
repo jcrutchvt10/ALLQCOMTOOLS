@@ -1,0 +1,27 @@
+
+FindEXE V0.4 - finds the path to an executable - Freeware by Uwe Sieber
+
+
+Console application.
+
+
+Usage:
+
+FindEXE program | document
+
+Samples:
+
+FindEXE calc
+
+FindEXE test.doc
+
+
+Uwe Sieber
+Feb 2016
+
+
+
+
+
+
+

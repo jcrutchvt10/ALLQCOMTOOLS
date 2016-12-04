@@ -1,0 +1,149 @@
+
+UsbTreeView V3.0.6.0 - Shows the USB Device Tree
+Freeware by Uwe Sieber - www.uwe-sieber.de
+
+Works under Windows 2000, XP and higher
+
+Usage:
+UsbTreeView [/R:filename] [/L[n]:logfile]
+
+/R:filename    write (silently) a report to filename
+/L[n]:logfile  write a logfile for debugging, helpful in case of crash or hang (causes massive slowdown);
+               n is the optional loglevel, default is 3, max is 5
+
+
+UsbTreeView is based upon the USBView sample from the Microsoft Windows Driver Kit for Server 2003.
+
+Improvements:
+- better icons in the treeview
+- refresh on device change performed asynchronously, per device and selected item stays selected
+- shows additional information gathered from the Windows device management
+- shows drive letters/mountpoints and COM ports
+- can perform safe removal, device restart and port restart
+- custom font and color for the right pane
+- toolbar with jump-lists for easily finding devices in complex trees
+- search to find device IDs, string descriptors etc
+
+History since V3.0.0, for old history see UsbTreeView.txt in here: http://www.uwe-sieber.de/files/usbtreeview261.zip
+
+V3.0.6   - New: Support for virtual USB Controllers where Hostcontroller and Root-Hub are one and the same device
+V3.0.5   - New: New port property PortConnectorIsTypeC (Win10 only)
+V3.0.4   - New: Device Manager problem numbers shown in the treeview icons
+V3.0.3   - New: Search hits get highlighted in the text pane
+V3.0.2   - Bugfix: Dropdown lists not refreshed on device arrival and removal
+V3.0.1   - Bugfix: Crash on full refresh
+V3.0.0   - New: No more enumeration of all devices on arrival and removal of a USB device
+         - New: Search function (not full text, only things like device ID, drive letter, volume name etc)
+         - New: Toolbar controls shrink if required
+         - New: Some new Keyboard shortcuts (Alt+D to open the drives list, Alt+O the Others list, Alt+S to focus the
+                search edit, Alt+Left/Right to cycle thru the search hits
+         - New: options not to expand empty hubs or hub with only empty hubs attached
+         - New: options to jump to arrived and removed devices
+         - New: option to expand tree items to make selected arrived and removed devices visible
+         - New: Uses Windows visual theme with option to turn it off
+
+ToDo:
+- USB Video Class H.264 decoding
+- Maybe Unicode support
+
+
+
+About Unknown Descriptors
+
+There are two reasons why decriptors cannot be decoded and therefore
+shown as "Unknown":
+- decoding is not implemented
+- the device's InterfaceClass is 0xFF (vendor specific), so class specific
+  descriptors cannot be decoded since their class is unknown
+
+So, if you have an unknown descriptor and the interface class is not 0xFF
+then please let me know, maybe I find the right specification document
+and can add the decoding for it.
+
+HID descriptors usually cannot be read. Probably this is because they
+must be requested from the interface rather than the device but the
+IOCTL_USB_GET_DESCRIPTOR_FROM_NODE_CONNECTION call doesn't offer the
+choice. The parameters are ignored and filled by the USB stack:
+"the USB stack ignores the value of bmRequest and inserts a value of 0x80
+which indicates standard USB device request".
+https://msdn.microsoft.com/en-us/library/windows/hardware/ff539272%28v=vs.85%29.aspx
+For most devices the result is an ERROR_GEN_FAILURE or ERROR_INVALID_PARAMETER.
+But some devices return the HID descriptor anyway.
+
+
+
+About "Safe Removal" and "Restart"
+
+On Safe Removal UsbTreeView first calls the configuration management call
+CM_Query_And_Remove_SubTree. On success the device has the problem code
+21 which is CM_PROB_WILL_BE_REMOVED. A code 21 device can be reactivated
+by performing a DIF_PROPERTYCHANGE class installer call. This is what
+UsbTreeView does if you select "Restart device".
+But CM_Query_And_Remove_SubTree needs admin previleges, otherwise it fails
+with CR_ACCESS_DENIED. In this case CM_Request_Device_Eject is called
+which works without admin previleges but leads to problem code 47 which
+is CM_PROB_HELD_FOR_EJECT. Such a device cannot be reactivated alone.
+A reactivation is possible by restarting the port or the whole hub it is
+attached to. But the latter of course restarts all devices attached to
+the hub.
+
+In all cases UsbTreeView just performs the system call and shows a
+message-box if Windows returns an error. But Windows does not always
+return an error, even there was one, so sometimes nothing happens at all.
+
+
+
+About "Restart Port"
+
+This calls IOCTL_USB_HUB_CYCLE_PORT which simulates a disconnect and
+reconnect of the attached device.
+It is available under XP but usually only for hubs which run with the
+Microsoft standard driver. 3rd party drivers usually return
+ERROR_UNKNOWN_FUNCTION.
+Under Vista and Windows 7 it is no more supported by the Windows standard
+drivers, it always fails with ERROR_NOT_SUPPORTED.
+Since Windows 8 it works again but in contrast to XP admin previleges
+are required. Without admin previleges it fails as under Vista and Win7
+with ERROR_NOT_SUPPORTED.
+
+
+About the Debug-Port
+
+In Microsoft's USBView sample there is a list of USB host controllers
+and their debug port. I've put the table into UsbTreeView, it shows
+then in the properties of the host controller a line like so:
+DebugPort (from List): 1
+Windows 8 has extended USB information, it reports for each port if it
+is debug capable and this works indeed (seen on a i945G Chipset with ICH7).
+
+
+
+USB Mouses
+
+If an USB mouse is moved while the tool requests its USB properties there
+is usually an error because the mouse just has more important things to
+do than answering descriptor requests. UsbTreeView tries then for some
+seconds to get this information.
+You might see the yellow question mark at the mouse's tree node for a
+moment which disappears as soon as you stop moving the mouse.
+This retry mechanism is done for all type of devices but usually its a
+mouse where it helps.
+
+
+Information shown in the tree-view
+
+UsbTreeView is optimized for speed, therefore USB descriptors are not
+gathered before a device is selected in the tree-view. So, information
+which come from USB descriptors cannot be shown in the tree-view, it
+all comes from the Windows device manager.
+This is also why creating a full report takes a moment.
+
+
+
+
+
+Uwe Sieber, mail@uwe-sieber.de
+Nov 2016
+
+
+

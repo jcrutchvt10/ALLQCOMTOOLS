@@ -1,0 +1,55 @@
+
+
+RunAsSystem V1.3.3 - runs a process in the SYSTEM context
+Freeware by Uwe Sieber - www.uwe-sieber.de
+
+Usage:
+
+RunAsSystem [-min|-max|-normal|-noact|-hid] [-low|-below|-normal|-above|-high] "executable" [params for executable]
+
+RunAsSystem waits for the started process to end and then passes its return code (aka errorlevel).
+RunAsSystem passes the window style and its process priority to the exeucted process.
+Both can be overruled by commandline params:
+
+Windows Stlye:
+-min	minimized
+-max	maximized
+-normal	normal
+-noact	no activate
+-hid	hidden
+
+Process Priority
+
+-low	low (aka idle) priority
+-below	below normal priority
+-normal normal priority
+-above	above normal priority
+-high	high priority
+
+
+Works under XP and higher only, Windows 2000 is untested.
+
+
+The Win32 version works under Win32 and x64 edtiions of Windows.
+
+
+Homepage:
+http://www.uwe-sieber.de/misctools_e.html#runassystem
+
+
+Licence
+
+
+RunAsSystem is Freeware.
+
+Allowed:
+- usage in any environment, including commercial
+- include in software products, including commercial
+- include on CD/DVD of computer magazines
+
+Not allowed:
+- changing any of the files
+- make available for download by means of a "Downloader" software of any kind
+
+
+

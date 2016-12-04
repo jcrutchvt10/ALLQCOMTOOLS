@@ -1,0 +1,80 @@
+
+DeviceCleanupCmd V0.4.1 - removes non present Devices from the device tree
+Freeware by Uwe Sieber (c) 2007-2016
+
+Works under Window 2000, XP, and higher
+
+Commandline tool which removes non present devices from the device tree
+which match one of the given patterns.
+
+Usage:
+
+DeviceCleanupCmd [-t][-s][-n][-m:min-age] pattern1 [pattern2] [patternN]
+
+-t  test only
+-s  skip creation of a system restore point
+-n  no wait for key press when finished
+-m  minimum age of devices to remove
+
+patterns are device IDs to remove, wildcards can be used.
+
+Samples:
+
+remove all non present devices whose device IDs begin with HID\\VID_045E
+DeviceCleanupCmd HID\VID_045E*
+
+remove all non present devices whose device IDs contain VID_045E
+DeviceCleanupCmd *VID_045E*
+
+remove all non present devices
+DeviceCleanupCmd *
+
+remove all non present devices not used for at least one year
+DeviceCleanupCmd * -m:1y
+
+Units are y - year, m - month, d - days, h - hours, i - minutes, s - seconds
+
+Test mode (shows which devices would be removed)
+DeviceCleanupCmd * -t
+
+
+The device's 'age' time comes from the write time of the device's registry key
+under HKEY_LOCAL_MACHINE\SYSTEM\CurrentControlSet\Enum
+
+On some Windows the times are set on startup, so all devices seem to have
+the same age. On most Windows the time is set when the device gets active.
+
+Non-PnP devices and 'soft' devices are not deleted because they are not automatically
+reinstalled. These are devices whose ID begins with
+- HTREE\ROOT\
+- ROOT\
+- SW\{
+
+If you want to delete them, use the Windows Device Manager.
+
+
+Under x64 edtitions of Windows only the x64 version works.
+
+Administrator previleges are required for cleanup.
+
+A GUI version is available too:
+http://www.uwe-sieber.de/misc_tools_e.html#devicecleanup
+
+
+
+Licence: Freeware
+
+Allowed:
+- usage in any environment, including commercial
+- include in software products, including commercial
+- include on CD/DVD of computer magazines
+
+Not allowed:
+- modify any of the files
+- offer for download by means of a "downloader" software
+
+
+
+Uwe Sieber
+Feb 2016
+
