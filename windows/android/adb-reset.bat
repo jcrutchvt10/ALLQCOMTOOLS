@@ -13,4 +13,5 @@ netstat -p TCP -n -o -a | findstr ":5037" > port
 for /f "tokens=5 delims= " %%a in (port) do taskkill /F /PID %%a >nul 2>nul
 del /f /q port >nul 2>nul
 
+::adb nodaemon server
 adb start-server >nul 2>nul

@@ -1,38 +1,11 @@
 #!/bin/bash
 
-#cygwin
-if [ -f "$HOME/.winixrc" ]; then
-	source ~/.winixrc
-fi
-
-#posix
-if [ -f "$HOME/.shrc" ]; then
-	source ~/.shrc
-fi
+#set -x
 
 # Android Debug Kit
 # This is a simple wrapper / script for "adb function / shell" */
 
 ################### function ###################
-adk_meminfo ()
-{
-	adb root
-	adb wait-for-device
-while [ 1 -eq 1 ]
-do
-	adb shell "cat /proc/meminfo"
-	adb shell "cat /proc/pagetypeinfo"
-	adb shell "cat /proc/slabinfo"
-	adb shell "cat /proc/zoneinfo"
-	adb shell "cat /proc/vmallocinfo"
-	adb shell "cat /proc/vmstat"
-	adb shell "cat /proc/meminfo"
-	adb shell "procrank"
-	adb shell "top -n 1"
-	adb shell "free -m"
-	adb shell "sleep 5"
-done
-}
 
 adk_input ()
 {
@@ -43,11 +16,22 @@ adk_root ()
 {
 	adb root
 	adb wait-for-device
-	for string in `adb shell mount | grep ro, | awk '{printf ("%s@%s\n",$1, $2) }'`; do
+	for string in `adb shell cat /proc/mounts | grep ro, | awk '{printf ("%s@%s\n",$1, $2) }'`; do
 		drive=$(echo $string  |awk -F'@' '$0=$1')
 		mountpoint=$(echo $string|awk -F'@' '$0=$2')
 		adb shell "mount -o remount $drive $mountpoint"
 	done
+}
+
+adk_fs-test ()
+{
+	adb root
+	adb wait-for-device
+
+	test_path="/data/fstest"
+	adb shell "mkdir $test_path"
+	adb shell "strace -T dd if=/dev/urandom of=$test_path/file.$$ bs=1024 count=100000"
+#	adb shell "rm -rf $test_path"
 }
 
 adk_panic ()
@@ -79,7 +63,7 @@ adk_hexdump()
 {
 	dump_path="/data/hexdump"
 	#blk_path="/dev/block/bootdevice/by-name"
-	blk_path=`adb shell mount | grep system | awk '{print $1}' | sed "s/\/system//g"`
+	blk_path=`adb shell cat /proc/mounts | grep system | awk '{print $1}' | sed "s/\/system//g"`
 	adb root
 	adb wait-for-device
 	adb shell "mkdir $dump_path"
@@ -222,14 +206,14 @@ case "$1" in
 		adb shell am start -n com.smartisanos.launcher/com.smartisanos.launcher.Launcher;;
 	hexdump)
 		adk_hexdump;;
-	meminfo)
-		adk_meminfo;;
 	flash-dir)
 		adk_flash-dir;;
 	symbol-dir)
 		adk_symbol-dir;;
 	fix-usb)
 		adk_fix-usb;;
+	fs-test)
+		adk_fs-test;;
 	usb-diag)
 		adk_usb-diag;;
 	pmap-all)
