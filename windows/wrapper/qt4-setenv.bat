@@ -3,6 +3,8 @@ rem
 rem This file is generated
 rem
 
+rem C:\Qt\4.8.7\bin\qtvars.bat
+
 echo Setting up a MinGW/Qt only environment...
 
 set PATH=%PATH%;C:\Qt\4.8.7\bin
