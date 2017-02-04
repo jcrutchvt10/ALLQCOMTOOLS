@@ -4,10 +4,10 @@ ps -ax | grep -v grep | grep emacs > /dev/null
 if [ $? -ne 0 ]; then
     #/opt/emacs/bin/emacs -nw $*
     #exit 0
-    /opt/emacs/bin/emacs &
+    emacs &
     #/opt/emacs/bin/emacs --daemon
     sleep 5
 fi
 
-/opt/emacs/bin/emacsclient -n $*
+emacsclient -n $*
 #/opt/emacs/bin/emacs -nw $*
