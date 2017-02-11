@@ -1,9 +1,11 @@
-#!/bin/sh
+!/bin/sh
+#
+#ps -ax | grep -v grep | grep Emacs > /dev/null
+#if [ $? -ne 0 ]; then
+#    /Applications/Emacs.app/Contents/MacOS/Emacs &
+#    sleep 5
+#fi
+#
+#emacsclient -n $*
 
-ps -ax | grep -v grep | grep Emacs > /dev/null
-if [ $? -ne 0 ]; then
-    /Applications/Emacs.app/Contents/MacOS/Emacs &
-    sleep 5
-fi
-
-emacsclient -n $*
+emacs -nw $*
