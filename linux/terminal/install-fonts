@@ -1,0 +1,32 @@
+#!/bin/sh
+
+if [ ! -f /usr/bin/wget ]; then
+    echo "please install wget"
+    exit 0
+elif [ $UID -ne 0 ]; then
+    echo "You need to use root."
+    exit 0
+else
+
+    wget -P /tmp/ https://github.com/kiddlu/Win7-Themes/raw/master/Font/YaHei%20Mono.zip
+
+    echo 'Truetype folder Creating...'
+    echo 'path:/usr/share/fonts/truetype/yahei-mono'
+
+    mkdir -p /usr/share/fonts/truetype/yahei-mono
+
+    echo 'Move font to truetype folder...'
+    unzip /tmp/YaHei\ Mono.zip
+    mv YaHei\ Mono.ttf /usr/share/fonts/truetype/yahei-mono/
+
+    echo 'Modifying font permissions...'
+
+    chmod 644 /usr/share/fonts/truetype/yahei-mono/YaHei\ Mono.ttf
+
+    echo 'installing YaHei Mono font...'
+
+    fc-cache -fv
+
+    echo 'Complete!'
+
+fi
