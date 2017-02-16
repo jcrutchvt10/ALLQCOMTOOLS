@@ -1,7 +1,5 @@
 #!/bin/bash
 
-#set -x
-
 # Android Debug Kit
 # This is a simple wrapper / script for "adb function / shell" */
 
@@ -125,7 +123,7 @@ adk_flash-dir()
 				map_point_regex=$(echo $map_point | sed "s/\//\\\\\//g")
 				drive_regex=$(echo $drive | sed "s/\:/\\\:/g")
 				win_path=$(echo "$unc_path" | sed "s/$map_point_regex/$drive_regex/g")
-				echo $win_path | tee /dev/console | tr '\n' ' ' | clip
+				echo $win_path | sed  "s/\//\\\\/g" | tee /dev/console | tr '\n' ' ' | clip
 			fi
 		done
 	fi
