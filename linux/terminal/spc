@@ -1,9 +1,3 @@
-#!/bin/sh
+#!/bin/bash
 
-ps -ax | grep -v grep | grep emacs > /dev/null
-if [ $? -ne 0 ]; then
-    emacs &
-    sleep 5
-fi
-
-emacsclient -n $*
+emacs -nw $*
