@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 CURRENT_DIR=`pwd`
 SERVER_IP=`echo $SSH_CONNECTION | awk '{print $1}'`
