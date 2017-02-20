@@ -3,7 +3,7 @@
 ps -ax | grep -v grep | grep emacs > /dev/null
 if [ $? -ne 0 ]; then
     emacs &
-    sleep 5
+    sleep 3
 fi
 
 emacsclient -n $*
