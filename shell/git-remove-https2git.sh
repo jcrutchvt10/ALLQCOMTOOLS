@@ -8,4 +8,4 @@ git_url=`git remote -v | sed -n 1p | awk '{print $2}' |  sed -e 's/^https:\/\//g
 git remote remove $remote_name
 git remote add $remote_name $git_url
 
-#git branch --set-upstream-to=$remote_name/$local_br $local_br
+git branch --set-upstream-to=$remote_name/$local_br $local_br
