@@ -1,0 +1,4 @@
+#!/bin/bash
+
+aria2c https://download.teamviewer.com/download/teamviewer_i386.deb
+dpkg -i teamviewer_i386.deb
