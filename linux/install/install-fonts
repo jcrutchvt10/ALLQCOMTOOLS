@@ -9,22 +9,17 @@ elif [ $UID -ne 0 ]; then
 else
 
     wget -P /tmp/ https://github.com/kiddlu/Win7-Themes/raw/master/Font/YaHei%20Mono.zip
-    wget -P /tmp/ https://github.com/kiddlu/Win7-Themes/raw/master/Font/simsun.zip
 
     echo 'truetype folder creating...'
 
     mkdir -p /usr/share/fonts/truetype/yahei-mono
-    mkdir -p /usr/share/fonts/truetype/simsun
 
     echo 'mv font to truetype folder...'
     unzip /tmp/YaHei\ Mono.zip
-    unzip /tmp/simsun.zip
     mv YaHei\ Mono.ttf /usr/share/fonts/truetype/yahei-mono/
-    mv simsun.ttc /usr/share/fonts/truetype/simsun
     echo 'modifying font permissions...'
 
     chmod 644 /usr/share/fonts/truetype/yahei-mono/YaHei\ Mono.ttf
-    chmod 644 /usr/share/fonts/truetype/simsun/simsun.ttc
 
     echo 'installing font...'
 
