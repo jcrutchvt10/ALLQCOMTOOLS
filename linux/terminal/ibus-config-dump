@@ -1,0 +1,3 @@
+#!/bin/bash
+
+dconf dump /desktop/ibus/ > ~/.config/ibus/ibus.dconf
