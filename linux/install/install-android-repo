@@ -1,0 +1,3 @@
+#!/bin/bash
+
+curl https://storage.googleapis.com/git-repo-downloads/repo > ~/xbin/linux/android/repo
