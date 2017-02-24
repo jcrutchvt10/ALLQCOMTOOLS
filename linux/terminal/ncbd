@@ -1,0 +1,31 @@
+#!/bin/bash
+
+#set -x
+
+msg_path=/tmp/ncbus_msg
+port=8963
+
+function usage() {
+    echo This is my simple netcat bus ncb deamon for personal use
+    echo
+    echo ncbd       : start service
+    echo ncbd stop  : stop service
+    echo ncbd msg   : show msg log
+    echo ncbd clear : clear msg log
+}
+
+if [ -z "$1" ]; then
+	echo >> $msg_path
+	echo ==========`date`========== >> $msg_path
+	nc -l -k $port >> $msg_path &
+elif [ "$1" = "stop" ]; then
+	nircmd killprocess /%PID%
+elif [ "$1" = "msg" ]; then
+	cat $msg_path
+elif [ "$1" = "clear" ]; then 
+	echo > $msg_path
+else
+	usage && exit -1
+fi
+
+exit -1

@@ -1,8 +1,16 @@
 #!/bin/bash
 
-CURRENT_DIR=`pwd`
-SERVER_IP=`echo $SSH_CONNECTION | awk '{print $1}'`
-CLIENT_IP=`echo $SSH_CONNECTION | awk '{print $3}'`
-NCB_PORT=8963
+set -x
 
-echo [JUMP] $SERVER_IP "$CURRENT_DIR $CLIENT_IP" | nc $SERVER_IP $NCB_PORT
+cur_dir=`pwd`
+ncb_port=8963
+
+if [ -n "$SSH_CONNECTION" ]; then
+    svr_ip=`echo $SSH_CONNECTION | awk '{print $1}'`
+    clt_ip=`echo $SSH_CONNECTION | awk '{print $3}'`
+    echo [JUMP] $svr_ip "$cur_dir $clt_ip" | nc $svr_ip $ncb_port
+else
+    svr_ip="127.0.0.1"
+    clt_ip="127.0.0.1"
+    echo [JUMP] $svr_ip "$cur_dir $clt_ip" | nc $svr_ip $ncb_port
+fi
