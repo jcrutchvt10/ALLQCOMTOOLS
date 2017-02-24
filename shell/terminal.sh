@@ -11,7 +11,7 @@ echo "connect to $1"
 case "$1" in  
 	ubuntu)
 		startx.bat &
-		ssh $UBUNTU_IP -l root -p 22 -o ForwardX11Trusted=yes -o ForwardX11=yes -C -o Compression=yes;;
+		ssh $UBUNTU_IP -p 22 -o ForwardX11Trusted=yes -o ForwardX11=yes -C -o Compression=yes;;
 	xvm)
 		startx.bat &
 		ssh $XVM -p 22 -o ForwardX11Trusted=yes -o ForwardX11=yes -C -o Compression=yes;;
