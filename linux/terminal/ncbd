@@ -19,7 +19,7 @@ if [ -z "$1" ]; then
 	echo ==========`date`========== >> $msg_path
 	nc -l -k $port >> $msg_path &
 elif [ "$1" = "stop" ]; then
-	nircmd killprocess /%PID%
+	killall nc
 elif [ "$1" = "msg" ]; then
 	cat $msg_path
 elif [ "$1" = "clear" ]; then 

@@ -1,9 +1,15 @@
 #!/bin/bash
 
-set -x
+#set -x
 
 cur_dir=`pwd`
 ncb_port=8963
+
+lsof -i:$ncb_port 2>&1 > /dev/null
+if [ $? -ne "0" ]; then
+    echo "ncbd do not start, pls start daemon first"
+    exit 1
+fi
 
 if [ -n "$SSH_CONNECTION" ]; then
     svr_ip=`echo $SSH_CONNECTION | awk '{print $1}'`
