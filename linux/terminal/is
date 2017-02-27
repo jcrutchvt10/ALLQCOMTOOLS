@@ -18,5 +18,5 @@ if [ -n "$SSH_CONNECTION" ]; then
 else
     svr_ip="127.0.0.1"
     clt_ip="127.0.0.1"
-    echo [JUMP] $svr_ip "$cur_dir $clt_ip" | nc $svr_ip $ncb_port
+    echo [JUMP] $svr_ip "$cur_dir $clt_ip" | nc $svr_ip $ncb_port &
 fi
