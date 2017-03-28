@@ -1,0 +1,3 @@
+#!/bin/bash
+
+~/xbin/perl/code2ebook/src2html.pl $*
