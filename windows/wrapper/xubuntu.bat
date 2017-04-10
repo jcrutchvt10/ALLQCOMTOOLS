@@ -1,3 +1,3 @@
 @echo off  
 
-"C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe" -x "F:\MyVirtual\Xubuntu\Xubuntu.vmx"
+start "" "C:\Program Files (x86)\VMware\VMware Workstation\vmware.exe" -x "F:\MyVirtual\Xubuntu\Xubuntu.vmx"
