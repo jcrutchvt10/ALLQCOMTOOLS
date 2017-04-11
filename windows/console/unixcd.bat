@@ -22,6 +22,10 @@ if '%1'=='-' (
 ) else if '%1'=='$' (
     cd /d %REPOROOT%
 	if not errorlevel 1 set OLDPWD=%cd%
+) else if '%1'=='?' (
+	for /f "delims=" %%i in (' dir ^| busybox grep "<DIR>" ^| peco ^| busybox awk "{print $4}" ') do (cd /d %%i)
+	cls
+	if not errorlevel 1 set OLDPWD=%cd%
 ) else (
     cd /d %*
     if not errorlevel 1 set OLDPWD=%cd%
@@ -38,3 +42,4 @@ echo cd ! : windows user desktop dir
 echo cd @ : windows user profile dir
 echo cd # : winix root dir
 echo cd $ : repo root dir
+echo cd ? : select dir to enter
