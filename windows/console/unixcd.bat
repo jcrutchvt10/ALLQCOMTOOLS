@@ -23,7 +23,7 @@ if '%1'=='-' (
     cd /d %REPOROOT%
 	if not errorlevel 1 set OLDPWD=%cd%
 ) else if '%1'=='?' (
-	for /f "delims=" %%i in (' dir ^| busybox grep "<DIR>" ^| peco ^| busybox awk "{print $4}" ') do (cd /d %%i)
+	for /f "delims=" %%i in (' dir /b /s /a:D ^| peco ') do (cd /d %%i)
 	cls
 	if not errorlevel 1 set OLDPWD=%cd%
 ) else (

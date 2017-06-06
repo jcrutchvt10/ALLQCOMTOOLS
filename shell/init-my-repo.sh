@@ -20,22 +20,3 @@ else
 	    setx REPOROOT `bb-pwd.bat` /M
     fi
 fi
-
-git clone git@github.com:kiddlu/Posix.git
-git clone git@github.com:kiddlu/Winix.git
-
-git clone git@github.com:kiddlu/hello-windows.git
-git clone git@github.com:kiddlu/hello-chrome.git
-git clone git@github.com:kiddlu/hello-sublime.git
-git clone git@github.com:kiddlu/hello-sourceinsight.git
-
-git clone git@github.com:kiddlu/adbputty.git
-git clone git@github.com:kiddlu/ramdump_toolkit.git
-git clone git@github.com:kiddlu/android-platform-knife.git
-git clone git@github.com:kiddlu/android-target-bsp.git
-
-git clone git@github.com:kiddlu/oh-my-examples.git
-git clone git@github.com:kiddlu/oh-my-tools.git
-git clone git@github.com:kiddlu/oh-my-config.git
-
-git clone git@github.com:kiddlu/Win7-Themes.git
