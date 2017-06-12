@@ -17,6 +17,6 @@ if [ $? != 0 ]; then
 else
 	echo "start init my repo"
     if [ "$SYS" == "cygwin" ]; then
-	    setx REPOROOT `bb-pwd.bat` /M
+	    setx REPOROOT `gow-pwd.bat` /M
     fi
 fi
