@@ -1,0 +1,2 @@
+source $HOME/xbin/linux/rclib/j.rc
+source $HOME/xbin/linux/rclib/proxy.rc
