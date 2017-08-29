@@ -17,7 +17,7 @@ if '%1'=='-' (
     cd /d %USERPROFILE%
 	if not errorlevel 1 set OLDPWD=%cd%
 ) else if '%1'=='#' (
-    cd /d %WINIXROOT%
+    cd /d %WINOSROOT%
 	if not errorlevel 1 set OLDPWD=%cd%
 ) else if '%1'=='$' (
     cd /d %REPOROOT%

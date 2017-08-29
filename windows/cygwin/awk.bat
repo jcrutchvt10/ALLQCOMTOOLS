@@ -1,3 +1,3 @@
 @echo off
 
-%WINIXROOT%\Cygwin\bin\gawk.exe %*
+%WINOSROOT%\Cygwin\bin\gawk.exe %*

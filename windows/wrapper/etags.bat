@@ -1,3 +1,3 @@
 @echo off
 
-%WINIXROOT%\Emacs\bin\etags.exe %*
+%WINOSROOT%\Emacs\bin\etags.exe %*

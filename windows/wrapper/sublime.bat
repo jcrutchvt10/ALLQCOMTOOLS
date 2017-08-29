@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\Sublime\sublime_text.exe %*
+start %WINOSROOT%\Sublime\sublime_text.exe %*

@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\Mat\MemoryAnalyzer.exe %*
+start %WINOSROOT%\Mat\MemoryAnalyzer.exe %*

@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\WinMerge\WinMergeU.exe %*
+start %WINOSROOT%\WinMerge\WinMergeU.exe %*

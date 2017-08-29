@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\PSPad\PSPad.exe %*
+start %WINOSROOT%\PSPad\PSPad.exe %*

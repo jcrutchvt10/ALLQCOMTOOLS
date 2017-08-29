@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\Hfs\hfs.exe %*
+start %WINOSROOT%\Hfs\hfs.exe %*

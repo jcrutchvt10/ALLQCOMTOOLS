@@ -2,4 +2,4 @@
 
 set CMDER_START=%cd%
 
-cmd /k %WINIXROOT%\Cmder\Cmder.init.bat
+cmd /k %WINOSROOT%\Cmder\Cmder.init.bat

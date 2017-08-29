@@ -1,3 +1,3 @@
 @echo off  
 
-%WINIXROOT%\Python\python.exe %*
+%WINOSROOT%\Python\python.exe %*

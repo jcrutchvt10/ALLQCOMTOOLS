@@ -1,3 +1,3 @@
 @echo off  
 
-%WINIXROOT%\you-get\you-get.exe %*
+%WINOSROOT%\you-get\you-get.exe %*

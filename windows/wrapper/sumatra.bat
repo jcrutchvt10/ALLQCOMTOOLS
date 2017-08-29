@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\SumatraPDF\SumatraPDF.exe %*
+start %WINOSROOT%\SumatraPDF\SumatraPDF.exe %*

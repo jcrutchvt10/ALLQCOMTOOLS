@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\AutoHotkey\AutoHotkey.exe %WINIXROOT%\AutoHotkey\ahkrc.ahk
+start %WINOSROOT%\AutoHotkey\AutoHotkey.exe %WINOSROOT%\AutoHotkey\ahkrc.ahk

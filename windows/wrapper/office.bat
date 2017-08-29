@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\LibreOffice\LibreOfficePortable.exe %*
+start %WINOSROOT%\LibreOffice\LibreOfficePortable.exe %*

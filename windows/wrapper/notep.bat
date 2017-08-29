@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINIXROOT%\Notepad++\notepad++.exe %*
+start %WINOSROOT%\Notepad++\notepad++.exe %*
