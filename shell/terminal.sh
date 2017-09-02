@@ -4,7 +4,7 @@ if [ -f "$HOME/.winixrc" ]; then
 fi
 
 UBUNTU_IP=172.16.14.252
-XVM=10.0.1.2
+XVM=10.0.1.129
 ROUTER_IP=192.168.1.1
 
 echo "connect to $1"
