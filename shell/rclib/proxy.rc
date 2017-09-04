@@ -1,6 +1,0 @@
-function proxy()
-{
-  echo "use lantern for http/https proxy"
-  export http_proxy=http://127.0.0.1:58292
-  export https_proxy=http://127.0.0.1:58292
-}
