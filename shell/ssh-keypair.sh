@@ -2,7 +2,7 @@
 
 usage="Usage: $0 key key.pub
 
-$0 1.0 by Kidd Lu."
+$0 1.0 by Bouken Shounen."
 
 case $1 in
 -h)    exec echo "$usage";;
