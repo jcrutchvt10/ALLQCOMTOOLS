@@ -1,3 +1,3 @@
 @echo off  
 
-start %WINOSROOT%\VLC\vlc.exe %*
+start "" "C:\Program Files\VLC\vlc.exe" %*
