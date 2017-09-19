@@ -1,4 +1,4 @@
 function proxy(){
-  export https_proxy=http://127.0.0.1:44537
-  export http_proxy=http://127.0.0.1:44537
+  export https_proxy=http://127.0.0.1:16666
+  export http_proxy=http://127.0.0.1:16666
 }
