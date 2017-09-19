@@ -2,7 +2,7 @@
 ::setlocal enableextensions enabledelayedexpansion
 
 :BEGIN
-set CYGWIN_ROOT=%WINOSROOT%\Cygwin
+set CYGWIN_ROOT=%CMDER_ROOT%\vendor\cygwin
 set DIST_DIR=%CYGWIN_ROOT%\dist
 set WGET=%CYGWIN_ROOT%\bin\wget.exe
 set BASH=%CYGWIN_ROOT%\bin\bash.exe
@@ -51,7 +51,7 @@ echo Clean dist files
 GOTO END
 
 :NOTFOUND
-ECHO Wget not found. Babun installation seems to be corrupted.
+ECHO Wget not found.
 pause
 EXIT /b 255
 
@@ -67,6 +67,5 @@ pause
 EXIT /b %errorlevel%
 
 :END
-ECHO Full success - starting cygwin
+ECHO Full success
 pause
-::start "" "%CYGWIN_ROOT%\bin\mintty.exe" - || goto :ERROR
