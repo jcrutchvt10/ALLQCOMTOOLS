@@ -1,4 +1,3 @@
-#!/bin/sh
-source ~/.winixrc
+#!/bin/bash
 
 exec /setup-x86.exe $*
