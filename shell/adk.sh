@@ -5,12 +5,12 @@
 
 ################### function ###################
 
-adk_input ()
+function input ()
 {
 	echo input
 }
 
-adk_root ()
+function root ()
 {
 	adb root
 	adb wait-for-device
@@ -21,7 +21,7 @@ adk_root ()
 	done
 }
 
-adk_fs-test ()
+function fs-test ()
 {
 	adb root
 	adb wait-for-device
@@ -32,14 +32,14 @@ adk_fs-test ()
 #	adb shell "rm -rf $test_path"
 }
 
-adk_panic ()
+function panic ()
 {
 	adb root
 	adb wait-for-device
 	adb shell "echo c > /proc/sysrq-trigger"
 }
 
-adk_listapk ()
+function listapk ()
 {
 	adb shell "pm list packages -f" > /tmp/tmplog.pid.$$
 
@@ -51,7 +51,7 @@ adk_listapk ()
 
 	rm /tmp/tmplog.pid.$$
 }
-adk_focusedapk ()
+function focusedapk ()
 {
 packages=`adb shell dumpsys activity  | grep mFocusedActivity | awk {'print $4'} | sed 's/\(.*\)\/\.\(.*\)/\1/g'`
 adb shell "pm list packages -f" | grep $packages
@@ -59,23 +59,18 @@ adb shell "pm list packages -f" | grep $packages
 
 adk_hexdump()
 {
-	dump_path="/data/hexdump"
 	#blk_path="/dev/block/bootdevice/by-name"
 	blk_path=`adb shell cat /proc/mounts | grep system | awk '{print $1}' | sed "s/\/system//g"`
 	adb root
 	adb wait-for-device
-	adb shell "mkdir $dump_path"
 	for partition in `adb shell ls $blk_path | grep -v "system\|cache\|userdata\|udisk"`; do
 		partition=`echo "$partition" | tr -d '\r\n'`
-		echo "dd if=$blk_path/$partition of=$dump_path/$partition"
-		adb shell "dd if=$blk_path/$partition of=$dump_path/$partition"
+		realpath=`adb shell readlink -f $blk_path/$partition | tr -d '\r\n'`
+		adb pull "$realpath" $partition
 	done
-	adb shell "sync"
-	adb pull  $dump_path .
-	adb shell "rm -rf $dump_path"
 }
 
-adk_cpu-performance()
+function cpu-performance()
 {
 	adb root
 	adb wait-for-device
@@ -91,7 +86,7 @@ adk_cpu-performance()
 	done
 }
 
-adk_net-shell()
+function net-shell()
 {
 	tcpport=5555
 	adb disconnect
@@ -107,7 +102,7 @@ adk_net-shell()
 	adb -s $ipaddr:$tcpport shell
 }
 
-adk_flash-dir()
+function flash-dir()
 {
 	webcgi="http://172.16.2.18/cgi-bin/vmlinux-lookup.cgi"
 	version=$(adb shell "cat /proc/version" | grep "Linux version")
@@ -129,7 +124,7 @@ adk_flash-dir()
 	fi
 }
 
-adk_symbol-dir()
+function symbol-dir()
 {
 	webcgi="http://172.16.2.18/cgi-bin/vmlinux-lookup.cgi"
 	version=$(adb shell "cat /proc/version" | grep "Linux version")
@@ -151,7 +146,7 @@ adk_symbol-dir()
 	fi
 }
 
-adk_fix-usb()
+function fix-usb()
 {
 	if [ $host_platform == "cygwin" ]; then
 		outpath=$USERPROFILE
@@ -163,13 +158,13 @@ adk_fix-usb()
 	adb start-server
 }
 
-adk_usb-diag()
+function usb-diag()
 {
 	adb root
 	adb wait-for-device
 }
 
-adk_pmap-all()
+function pmap-all()
 {
 	for pid in `adb shell "ps" | awk '{print $2}' `; do
 		cmdline=`adb shell cat /proc/$pid/cmdline`
@@ -195,38 +190,41 @@ if [ $# -lt 1 ] ; then
 	exit 1;
 fi
 
-case "$1" in  
-	ftyrst)
+case "$1" in
+	help) #help_list
+		  cat $0 | grep " #help_list" | sed 's/) #help_list//' | grep -v sed;;
+	ftyrst) #help_list
 		adb shell am broadcast -a android.intent.action.MASTER_CLEAR;;
-	smartisan-active)
+	smartisan-active) #help_list
 		adb shell am start -n com.smartisanos.setupwizard/com.smartisanos.setupwizard.SetupWizardCompleteActivity;;
-	smartisan-launcher)
+	smartisan-launcher) #help_list
 		adb shell am start -n com.smartisanos.launcher/com.smartisanos.launcher.Launcher;;
-	hexdump)
-		adk_hexdump;;
-	flash-dir)
-		adk_flash-dir;;
-	symbol-dir)
-		adk_symbol-dir;;
-	fix-usb)
-		adk_fix-usb;;
-	fs-test)
-		adk_fs-test;;
-	usb-diag)
-		adk_usb-diag;;
-	pmap-all)
-		adk_pmap-all;;
-	root)
-		adk_root;;
-	cpu-performance)
-		adk_cpu-performance;;
-	panic)
-		adk_panic;;
-	listapk)
-		adk_listapk;;
-	focusedapk)
-		adk_focusedapk;;
-	net-shell)
-		adk_net-shell;;
-	*) adb shell $*;;
+	hexdump) #help_list
+		hexdump;;
+	flash-dir) #help_list
+		flash-dir;;
+	symbol-dir) #help_list
+		symbol-dir;;
+	fix-usb) #help_list
+		fix-usb;;
+	fs-test) #help_list
+		fs-test;;
+	usb-diag) #help_list
+		usb-diag;;
+	pmap-all) #help_list
+		pmap-all;;
+	root) #help_list
+		root;;
+	cpu-performance) #help_list
+		cpu-performance;;
+	panic) #help_list
+		panic;;
+	listapk) #help_list
+		listapk;;
+	focusedapk) #help_list
+		focusedapk;;
+	net-shell) #help_list
+		net-shell;;
+	*) #help_list
+    adb shell $*;;
 esac
